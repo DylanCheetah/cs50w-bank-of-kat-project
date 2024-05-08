@@ -1,0 +1,38 @@
+{% extends "bank/layout.html" %}
+{% load static %}
+
+{% block title %}Bank of Kat - Accounts{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1 class="col">New Account</h1>
+    </div>
+    {% if error %}
+        <div class="row">
+            <div class="col alert alert-danger" style="margin: 8px;">{{ error }}</div>
+        </div>
+    {% endif %}
+    <div class="row">
+        <form class="col" action="{% url 'bank:open-account' %}" method="post">
+            {% csrf_token %}
+            <table>
+                {{ form }}
+                <tr>
+                    <td></td>
+                    <td><input class="btn btn-primary" type="submit" value="Open Account"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="row">
+        <hr class="col">
+    </div>
+    <div class="row">
+        <h1 class="col">Your Accounts</h1>
+    </div>
+    <div id="root"></div>
+    <div class="row">
+        <hr class="col">
+    </div>
+    <script type="text/babel" src="{% static 'bank/scripts/accounts.jsx' %}"></script>
+{% endblock %}
